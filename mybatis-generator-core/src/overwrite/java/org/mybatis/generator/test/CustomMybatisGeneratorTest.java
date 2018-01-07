@@ -41,7 +41,6 @@ public class CustomMybatisGeneratorTest {
 	 * @see org.mybatis.generator.api.MyBatisGenerator#getGeneratedXmlFiles()
 	 * 增加了gxf.isMergeable()的判断导致xml未重写
 	* @Title: testShellRunner
-	* @Description: TODO(这里用一句话描述这个方法的作用)
 	* @param     参数
 	* @return void    返回类型
 	* @throws
