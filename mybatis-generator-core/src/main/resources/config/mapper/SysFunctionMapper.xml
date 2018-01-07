@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.winning.ssgj.rbac.dao.SysFunctionMapper">
+  <resultMap id="BaseResultMap" type="cn.com.winning.ssgj.model.SysFunction">
+    <id column="FUNC_ID" jdbcType="INTEGER" property="funcId" />
+    <result column="FUNC_NAME" jdbcType="VARCHAR" property="funcName" />
+    <result column="FUNC_ACTION" jdbcType="VARCHAR" property="funcAction" />
+    <result column="FUNC_TYPE" jdbcType="CHAR" property="funcType" />
+    <result column="FUNC_DESC" jdbcType="VARCHAR" property="funcDesc" />
+    <result column="LAST_UPDATOR" jdbcType="INTEGER" property="lastUpdator" />
+    <result column="LAST_UPDATE_TIME" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    FUNC_ID, FUNC_NAME, FUNC_ACTION, FUNC_TYPE, FUNC_DESC, LAST_UPDATOR, LAST_UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_function
+    where FUNC_ID = #{funcId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_function
+    where FUNC_ID = #{funcId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.winning.ssgj.model.SysFunction">
+    insert into sys_function (FUNC_ID, FUNC_NAME, FUNC_ACTION, 
+      FUNC_TYPE, FUNC_DESC, LAST_UPDATOR, 
+      LAST_UPDATE_TIME)
+    values (#{funcId,jdbcType=INTEGER}, #{funcName,jdbcType=VARCHAR}, #{funcAction,jdbcType=VARCHAR}, 
+      #{funcType,jdbcType=CHAR}, #{funcDesc,jdbcType=VARCHAR}, #{lastUpdator,jdbcType=INTEGER}, 
+      #{lastUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.winning.ssgj.model.SysFunction">
+    insert into sys_function
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="funcId != null">
+        FUNC_ID,
+      </if>
+      <if test="funcName != null">
+        FUNC_NAME,
+      </if>
+      <if test="funcAction != null">
+        FUNC_ACTION,
+      </if>
+      <if test="funcType != null">
+        FUNC_TYPE,
+      </if>
+      <if test="funcDesc != null">
+        FUNC_DESC,
+      </if>
+      <if test="lastUpdator != null">
+        LAST_UPDATOR,
+      </if>
+      <if test="lastUpdateTime != null">
+        LAST_UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="funcId != null">
+        #{funcId,jdbcType=INTEGER},
+      </if>
+      <if test="funcName != null">
+        #{funcName,jdbcType=VARCHAR},
+      </if>
+      <if test="funcAction != null">
+        #{funcAction,jdbcType=VARCHAR},
+      </if>
+      <if test="funcType != null">
+        #{funcType,jdbcType=CHAR},
+      </if>
+      <if test="funcDesc != null">
+        #{funcDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdator != null">
+        #{lastUpdator,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.winning.ssgj.model.SysFunction">
+    update sys_function
+    <set>
+      <if test="funcName != null">
+        FUNC_NAME = #{funcName,jdbcType=VARCHAR},
+      </if>
+      <if test="funcAction != null">
+        FUNC_ACTION = #{funcAction,jdbcType=VARCHAR},
+      </if>
+      <if test="funcType != null">
+        FUNC_TYPE = #{funcType,jdbcType=CHAR},
+      </if>
+      <if test="funcDesc != null">
+        FUNC_DESC = #{funcDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdator != null">
+        LAST_UPDATOR = #{lastUpdator,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateTime != null">
+        LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where FUNC_ID = #{funcId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.winning.ssgj.model.SysFunction">
+    update sys_function
+    set FUNC_NAME = #{funcName,jdbcType=VARCHAR},
+      FUNC_ACTION = #{funcAction,jdbcType=VARCHAR},
+      FUNC_TYPE = #{funcType,jdbcType=CHAR},
+      FUNC_DESC = #{funcDesc,jdbcType=VARCHAR},
+      LAST_UPDATOR = #{lastUpdator,jdbcType=INTEGER},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where FUNC_ID = #{funcId,jdbcType=INTEGER}
+  </update>
+</mapper>

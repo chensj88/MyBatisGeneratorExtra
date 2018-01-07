@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<context id="mysqlTable" targetRuntime="MyBatis3"
+		defaultModelType="flat">
+		<!--注释信息 
+		    type指定自定义的comment生成类
+		 -->
+		<commentGenerator>
+		    <!--**阻止**生成注释，默认为false  -->
+			<property name="suppressAllComments" value="true" />
+			<!--**阻止**生成的注释包含时间戳，默认为false  -->
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+	
+		<!--指定数据库连接信息
+		  配置该元素只需要注意如果JDBC驱动不在**classpath**下，就需要通过<classPathEntry>元素引入jar包，
+		  这里**推荐**将jar包放到**classpath**下。
+		  必选属性:
+		    driverClass:访问数据库的JDBC驱动程序的完全限定类名
+			connectionURL:访问数据库的JDBC连接URL
+			userId:访问数据库的用户ID
+			password:访问数据库的密码
+		  -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/ssgj?useUnicode=true&amp;characterEncoding=UTF8"
+			userId="root" password="123456" />
+
+		<!--
+		指定JDBC类型和Java类型如何转换
+			提供了一个可选的属性type，和<commentGenerator>比较类型，提供了默认的实现DEFAULT
+			可以配置的属性为forceBigDecimals，该属性可以控制是否强制DECIMAL和NUMERIC类型的
+			字段转换为Java类型的java.math.BigDecimal,默认值为false
+			 指定生成的类型为java类型，
+			避免数据库中number等类型字段
+			设置为true，那么一定会使用java.math.BigDecimal
+		 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 
+		 用来控制生成的实体类，根据<context>中配置的defaultModelType
+		  	targetPackage:生成实体类存放的包名，一般就是放在该包下。实际还会受到其他配置的影响(<table>中会提到)。
+			targetProject:指定目标项目路径，可以是绝对路径或相对路径（如 targetProject="src/main/java"）
+			
+		 	 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
+		<javaModelGenerator targetPackage="cn.com.winning.ssgj.model"
+			targetProject="src/main/java">
+			<!-- 如果true，MBG会根据catalog和schema来生成子包。
+			    如果false就会直接用targetPackage属性。默认为false 
+			   -->
+			<property name="enableSubPackages" value="true" />
+			<!--是否对数据库查询结果进行trim操作  -->
+			<property name="trimStrings" value="true" />
+			<property name="targetProject" value="src/main/java" />
+			<!--  
+			constructorBased:该属性只对MyBatis3有效，如果true就会使用构造方法入参，如果false就会使用setter方式。默认为false
+			immutable:该属性用来配置实体类属性是否可变，如果设置为true，那么constructorBased不管设置成什么，都会使用构造方法入参，并且不会生成setter方法。如果为false，实体类属性就可以改变。默认为false。
+			rootClass:设置所有实体类的基类。如果设置，需要使用类的全限定名称。并且如果MBG能够加载rootClass，那么MBG不会覆盖和父类中完全匹配的属性。匹配规则：
+				属性名完全相同
+				属性类型相同
+				属性有getter方法
+				属性有setter方法
+			-->
+		</javaModelGenerator>
+
+		<!--对应的xml mapper文件 -->
+		<sqlMapGenerator targetPackage="config.mapper"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="targetProject" value="src/main/java" />
+		</sqlMapGenerator>
+
+		<!-- 对应的dao接口 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="cn.com.winning.ssgj.rbac.dao" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="targetProject" value="src/main/java" />
+		</javaClientGenerator>
+
+		<!-- <table tableName="sys_log" domainObjectName="Log" enableCountByExample="false" 
+			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" 
+			selectByExampleQueryId="false" /> -->
+		<table tableName="sys_user" domainObjectName="SysUser"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" />
+		<!-- <table tableName="sys_user_role" domainObjectName="SysUserRole"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" />
+		<table tableName="sys_role" domainObjectName="SysRole"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" />
+		<table tableName="sys_function" domainObjectName="SysFunction"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" />
+		<table tableName="sys_role_function" domainObjectName="SysRoleFunction"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" /> -->
+	</context>
+</generatorConfiguration>

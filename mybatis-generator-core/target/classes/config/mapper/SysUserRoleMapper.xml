@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.winning.ssgj.rbac.dao.SysUserRoleMapper">
+  <resultMap id="BaseResultMap" type="cn.com.winning.ssgj.model.SysUserRole">
+    <id column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <id column="ROLE_ID" jdbcType="INTEGER" property="roleId" />
+    <result column="LAST_UPDATOR" jdbcType="INTEGER" property="lastUpdator" />
+    <result column="LAST_UPDATE_TIME" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ID, ROLE_ID, LAST_UPDATOR, LAST_UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user_role
+    where USER_ID = #{userId,jdbcType=INTEGER}
+      and ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from sys_user_role
+    where USER_ID = #{userId,jdbcType=INTEGER}
+      and ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.winning.ssgj.model.SysUserRole">
+    insert into sys_user_role (USER_ID, ROLE_ID, LAST_UPDATOR, 
+      LAST_UPDATE_TIME)
+    values (#{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{lastUpdator,jdbcType=INTEGER}, 
+      #{lastUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.winning.ssgj.model.SysUserRole">
+    insert into sys_user_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="lastUpdator != null">
+        LAST_UPDATOR,
+      </if>
+      <if test="lastUpdateTime != null">
+        LAST_UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdator != null">
+        #{lastUpdator,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.winning.ssgj.model.SysUserRole">
+    update sys_user_role
+    <set>
+      <if test="lastUpdator != null">
+        LAST_UPDATOR = #{lastUpdator,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateTime != null">
+        LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+      and ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.winning.ssgj.model.SysUserRole">
+    update sys_user_role
+    set LAST_UPDATOR = #{lastUpdator,jdbcType=INTEGER},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where USER_ID = #{userId,jdbcType=INTEGER}
+      and ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </update>
+</mapper>

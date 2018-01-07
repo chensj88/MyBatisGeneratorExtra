@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.winning.ssgj.rbac.dao.SysUserMapper">
+  <resultMap id="BaseResultMap" type="cn.com.winning.ssgj.model.SysUser">
+    <id column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="C_NAME" jdbcType="VARCHAR" property="cName" />
+    <result column="user_card" jdbcType="VARCHAR" property="userCard" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="user_type" jdbcType="CHAR" property="userType" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="LAST_UPDATOR" jdbcType="INTEGER" property="lastUpdator" />
+    <result column="LAST_UPDATE_TIME" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ID, USER_NAME, C_NAME, user_card, status, sex, user_type, PASSWORD, email, LAST_UPDATOR, 
+    LAST_UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_user
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.winning.ssgj.model.SysUser">
+    insert into sys_user (USER_ID, USER_NAME, C_NAME, 
+      user_card, status, sex, user_type, 
+      PASSWORD, email, LAST_UPDATOR, 
+      LAST_UPDATE_TIME)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{cName,jdbcType=VARCHAR}, 
+      #{userCard,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{sex,jdbcType=CHAR}, #{userType,jdbcType=CHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{lastUpdator,jdbcType=INTEGER}, 
+      #{lastUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.winning.ssgj.model.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="cName != null">
+        C_NAME,
+      </if>
+      <if test="userCard != null">
+        user_card,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="lastUpdator != null">
+        LAST_UPDATOR,
+      </if>
+      <if test="lastUpdateTime != null">
+        LAST_UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="cName != null">
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="userCard != null">
+        #{userCard,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=CHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdator != null">
+        #{lastUpdator,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.winning.ssgj.model.SysUser">
+    update sys_user
+    <set>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="cName != null">
+        C_NAME = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="userCard != null">
+        user_card = #{userCard,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=CHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdator != null">
+        LAST_UPDATOR = #{lastUpdator,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateTime != null">
+        LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.winning.ssgj.model.SysUser">
+    update sys_user
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      C_NAME = #{cName,jdbcType=VARCHAR},
+      user_card = #{userCard,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      sex = #{sex,jdbcType=CHAR},
+      user_type = #{userType,jdbcType=CHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      LAST_UPDATOR = #{lastUpdator,jdbcType=INTEGER},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

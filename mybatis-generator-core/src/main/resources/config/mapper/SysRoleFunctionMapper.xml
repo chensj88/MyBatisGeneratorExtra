@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.winning.ssgj.rbac.dao.SysRoleFunctionMapper">
+  <resultMap id="BaseResultMap" type="cn.com.winning.ssgj.model.SysRoleFunction">
+    <id column="ROLE_ID" jdbcType="INTEGER" property="roleId" />
+    <id column="FUNC_ID" jdbcType="INTEGER" property="funcId" />
+    <result column="EDIT_AUTH" jdbcType="CHAR" property="editAuth" />
+    <result column="APPROVE_AUTH" jdbcType="CHAR" property="approveAuth" />
+    <result column="VIEW_AUTH" jdbcType="CHAR" property="viewAuth" />
+    <result column="LAST_UPDATOR" jdbcType="INTEGER" property="lastUpdator" />
+    <result column="LAST_UPDATE_TIME" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ROLE_ID, FUNC_ID, EDIT_AUTH, APPROVE_AUTH, VIEW_AUTH, LAST_UPDATOR, LAST_UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_function
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+      and FUNC_ID = #{funcId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from sys_role_function
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+      and FUNC_ID = #{funcId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.winning.ssgj.model.SysRoleFunction">
+    insert into sys_role_function (ROLE_ID, FUNC_ID, EDIT_AUTH, 
+      APPROVE_AUTH, VIEW_AUTH, LAST_UPDATOR, 
+      LAST_UPDATE_TIME)
+    values (#{roleId,jdbcType=INTEGER}, #{funcId,jdbcType=INTEGER}, #{editAuth,jdbcType=CHAR}, 
+      #{approveAuth,jdbcType=CHAR}, #{viewAuth,jdbcType=CHAR}, #{lastUpdator,jdbcType=INTEGER}, 
+      #{lastUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.winning.ssgj.model.SysRoleFunction">
+    insert into sys_role_function
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="funcId != null">
+        FUNC_ID,
+      </if>
+      <if test="editAuth != null">
+        EDIT_AUTH,
+      </if>
+      <if test="approveAuth != null">
+        APPROVE_AUTH,
+      </if>
+      <if test="viewAuth != null">
+        VIEW_AUTH,
+      </if>
+      <if test="lastUpdator != null">
+        LAST_UPDATOR,
+      </if>
+      <if test="lastUpdateTime != null">
+        LAST_UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="funcId != null">
+        #{funcId,jdbcType=INTEGER},
+      </if>
+      <if test="editAuth != null">
+        #{editAuth,jdbcType=CHAR},
+      </if>
+      <if test="approveAuth != null">
+        #{approveAuth,jdbcType=CHAR},
+      </if>
+      <if test="viewAuth != null">
+        #{viewAuth,jdbcType=CHAR},
+      </if>
+      <if test="lastUpdator != null">
+        #{lastUpdator,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.winning.ssgj.model.SysRoleFunction">
+    update sys_role_function
+    <set>
+      <if test="editAuth != null">
+        EDIT_AUTH = #{editAuth,jdbcType=CHAR},
+      </if>
+      <if test="approveAuth != null">
+        APPROVE_AUTH = #{approveAuth,jdbcType=CHAR},
+      </if>
+      <if test="viewAuth != null">
+        VIEW_AUTH = #{viewAuth,jdbcType=CHAR},
+      </if>
+      <if test="lastUpdator != null">
+        LAST_UPDATOR = #{lastUpdator,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateTime != null">
+        LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+      and FUNC_ID = #{funcId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.winning.ssgj.model.SysRoleFunction">
+    update sys_role_function
+    set EDIT_AUTH = #{editAuth,jdbcType=CHAR},
+      APPROVE_AUTH = #{approveAuth,jdbcType=CHAR},
+      VIEW_AUTH = #{viewAuth,jdbcType=CHAR},
+      LAST_UPDATOR = #{lastUpdator,jdbcType=INTEGER},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+      and FUNC_ID = #{funcId,jdbcType=INTEGER}
+  </update>
+</mapper>
